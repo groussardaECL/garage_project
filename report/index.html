@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+    <head>
+        <title>Rapport Garage</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    </head>
+    <body>
+    <h1>
+        Notes générales sur le developpement de l'application
+    </h1>
+    <p>
+        Après une première lecture du sujet, nous nous sommes lancés dans l'établissement d'un modèle entité-association. Pour cela nous avons établis une liste de l'ensemble des attributs dont nous avions besoin, et les avons organisé entre entités, associations et propriétés. L'organisation des différents éléments du modèle nous a conduit à nous poser de multiples questions sur les bonnes pratiques en conception de bases de données. Nous avons senti le besoin de completer le cours par la lecture de plusieurs ouvrages :
+    </p>
+    <ul>
+        <li>
+            Les bases de données relationnelles - André FLORY, Frédérique LAFOREST - Edition Economica
+        </li>
+        <li>
+            L'autre bouquin laissé à la maison
+        </li>
+    </ul>
+    <p>
+        Un des principaux problèmes que nous avions est que nous n'arrivions pas à décomposer la conception du modèle entité-association et la conception à proprement parlé de la base de données et de ses différentes tables. Ainsi, nous nous sommes attachés dans un premier temps à concevoir le modèle, en listant toutes les entités, associations, en précisant les cardinalités des entités au sein des associations. Dans un second temps, nous avons effectué la traduction de ce modèle entité-association en modèle relationnel :
+        <ul>
+        <li>
+            Chaque type d'entité a été traduite en relation, avec les propriétés du type d'entité devenant attributs de la relation,
+        </li>
+        <li>
+            Si un type d'association ne possédait pas de pattes avec une cardinalité maximale de 1, alors l'association était traduite en relation,
+        </li>
+        <li>
+            Si un type d'association possédait une patte avec une cardinalité maximale de 1, c'était le signe d'une dépendance fonctionnelle. On a alors ajouté un attribut dans l'entité source de la dépendance fonctionnelle, cet attribut correspondant à la clé de l'autre type d'entité.
+        </li>
+    </ul>
+    </p>
+    <p>
+        La différence entre la tarification forfaitaire et la tarification non forfaitaire composée des coûts combinés de la main d'oeuvre et des pièces ont présentés quelques difficultés lors de la conception du modèle entité-relation.
+    </p>
+    <p>
+        OPTIONEL : Un aspect n'a pas été abordé dans le sujet, celle de la tarification. Sachant que les prix des forfaits, des pièces et des taux horaires des techniciens peuvent évoluer dans le temps, nous ne pouvions pas calculer ses valeurs assurer que le calcul des factures pouvaient être constant dans le temps. Ainsi, nous avons décidé de créer un type d'entité facturation, permettant l'enregistrement de l'historique des factures.
+    </p>
+    <p>
+        Nous avons ainsi obtenu le modèle relationel suivant :
+        <ul>
+            <li>Client (<u>IDclient</u>, nom, prenom, nomcCommune, IDreferent)</li>
+            <li>Referent (<u>Idreferent</u>, nom, prenom)</li>
+            <li>Technicien (<u>IDtechnicien</u>, nom, prenom, tauxHoraire)</li>
+            <li>Vehicule (<u>immatriculation</u>, typeVehicule, marque, annee, IDclient)</li>
+            <li>Operation (<u>IDoperation</u>, typeOperation, prixMainOeuvre, prixPiece, kilometrage, dateArrivee, immatriculation)</li>
+            <li>Commentaires (<u>IDcommentaire</u>, IDreparation, IDtechnicien, commentaire, datetime)</li>
+        </ul>
+        Ainsi, nous avons décidé ne pas enregistrer le nombre de voitures réparées par commune et par technicien, mais de le calculer par la suite grâce à des requêtes sur les différentes tables. Cette décision nous permettait d'éviter la création d'une relation uniquement pour le comptage du nombre de clients par ville.
+    </p>
+    <p>
+        Les 6 relations sont en forme normale de Boyce-Cobb (F.B.N.C.), nous assurant ainsi un certain niveau d'intégrité des données.
+    </p>
+    </body>
+</html>
