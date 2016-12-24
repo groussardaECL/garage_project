@@ -37,22 +37,151 @@
         La différence entre la tarification forfaitaire et la tarification non forfaitaire composée des coûts combinés de la main d'oeuvre et des pièces ont présentés quelques difficultés lors de la conception du modèle entité-relation.
     </p>
     <p>
-        OPTIONEL : Un aspect n'a pas été abordé dans le sujet, celle de la tarification. Sachant que les prix des forfaits, des pièces et des taux horaires des techniciens peuvent évoluer dans le temps, nous ne pouvions pas calculer ses valeurs assurer que le calcul des factures pouvaient être constant dans le temps. Ainsi, nous avons décidé de créer un type d'entité facturation, permettant l'enregistrement de l'historique des factures.
+        OPTIONEL : Un aspect n'a pas été abordé dans le sujet, celle de la tarification. Sachant que les prix des forfaits, des pièces et des taux horaires des techniciens peuvent évoluer dans le temps, nous ne pouvions pas calculer ses valeurs assurer que le calcul des factures pouvaient être constant dans le temps. Ainsi, nous avons décidé de créer un type d'entité facturation, permettant l'enregistrement de l'historique des factures.<br/>
+        Une autre solution simple consiste à créer une relation forfaits(<u>typeForfait</u>, prixForfait), et ainsi conserver les prix actuels dans cette table, et enregistrer l'historique des paiements dans la table interventions.
     </p>
     <p>
         Nous avons ainsi obtenu le modèle relationel suivant :
         <ul>
-            <li>Client (<u>IDclient</u>, nom, prenom, nomcCommune, IDreferent)</li>
-            <li>Referent (<u>Idreferent</u>, nom, prenom)</li>
-            <li>Technicien (<u>IDtechnicien</u>, nom, prenom, tauxHoraire)</li>
-            <li>Vehicule (<u>immatriculation</u>, typeVehicule, marque, annee, IDclient)</li>
-            <li>Operation (<u>IDoperation</u>, typeOperation, prixMainOeuvre, prixPiece, kilometrage, dateArrivee, immatriculation)</li>
-            <li>Commentaires (<u>IDcommentaire</u>, IDreparation, IDtechnicien, commentaire, datetime)</li>
+            <li>clients (<u>IDclient</u>, nom, prenom, nomCommune, IDreferent)</li>
+            <li>referents (<u>Idreferent</u>, nom, prenom)</li>
+            <li>techniciens (<u>IDtechnicien</u>, nom, prenom)</li>
+            <li>vehicules (<u>immatriculation</u>, typeVehicule, marque, annee)</li>
+            <li>interventions (<u>IDoperation</u>, typeOperation, prixForfait, prixMainOeuvre, prixPiece, kilometrage, dateArrivee, immatriculation)</li>
+            <li>commentaires (<u>IDcommentaire</u>, IDreparation, IDtechnicien, commentaire, dateHeureCommentaires)</li>
+            <li>forfaits (<u>typeIntervention</u>, prixForfait)</li>
+            <li>repare (<u>IDtechnicien</u>, <u>IDoperation</u>)</li>
+            <li>appartient (<u>IDclient</u>, <u>immatriculation</u>)</li>
+        </ul>
+        Avec les types de données suivants :
+        <ul>
+            <li>INT(11)</li>
+            <ul>
+                <li>IDclient</li>
+                <li>IDreferent</li>
+                <li>IDtechnicien</li>
+                <li>IDintervention</li>
+                <li>IDcommentaire</li>
+            </ul>
+            <li>INT(20)</li>
+            <ul>
+                <li>kilometrage</li>
+            </ul>
+            <li>YEAR(4)</li>
+            <ul>
+                <li>annee</li>
+            </ul>
+            <li>VARCHAR(45)</li>
+            <ul>
+                <li>nom</li>
+                <li>prenom</li>
+                <li>commune</li>
+                <li>typeIntervention</li>
+                <li>typeVehicule</li>
+                <li>marque</li>
+            </ul>
+            <li>VARCHAR(15)</li>
+            <ul>
+                <li>immatriculation</li>
+            </ul>
+            <li>LONGTEXT</li>
+            <ul>
+                <li>commentaire</li>
+            </ul>
+            <li>DATE</li>
+            <ul>
+                <li>dateArrivee</li>
+            </ul>
+            <li>DATETIME</li>
+            <ul>
+                <li>dateHeureCommentaire</li>
+            </ul>
+            <li>DOUBLE(13,2)</li>
+            <ul>
+                <li>prixForfait</li>
+                <li>prixMainOeuvre</li>
+                <li>prixPiece</li>
+            </ul>
         </ul>
         Ainsi, nous avons décidé ne pas enregistrer le nombre de voitures réparées par commune et par technicien, mais de le calculer par la suite grâce à des requêtes sur les différentes tables. Cette décision nous permettait d'éviter la création d'une relation uniquement pour le comptage du nombre de clients par ville.
     </p>
     <p>
         Les 6 relations sont en forme normale de Boyce-Cobb (F.B.N.C.), nous assurant ainsi un certain niveau d'intégrité des données.
+    </p>
+    <h2>
+        Problèmes inhérents à la concception de la base de données
+    </h2>
+    <p>
+        Si un referent ou un technicien est également un client, cela conduira à une duplication des données avec la relation client.</br>
+        Une solution pourrait être de créer une seule base de données "personnes", puis d'attribuer des booléens pour caractériser les techniciens et les référents (au cas où ceux-ci sont également des clients du garage).
+    </p>
+    <p>
+        La base de données et les tables ont été créées, maintenant, nous devons definir les clés étrangères entre les tables.
+        La convention suivante est adoptée pour nommer les clés étrangères : FK_ForeignKeyTable_PrimaryKeyTable
+    </p>
+    <table>
+        <tr>
+            <th>Nom de la clé étrangère</th>
+            <th>On Update</th>
+            <th>On Delete</th>
+        </tr>
+        <tr>
+            <td>FK_appartient_IDclient</td>
+            <td>Restrict</td>
+            <td>Restrict</td>
+        </tr>
+        <tr>
+            <td>FK_appartient_immatriculation</td>
+            <td>Cascade</td>
+            <td>Cascade</td>
+        </tr>
+        <tr>
+            <td>FK_clients_IDreferent</td>
+            <td>Restrict</td>
+            <td>Restrict</td>
+        </tr>
+        <tr>
+            <td>FK_commentaires_IDtechnicien</td>
+            <td>Restrict</td>
+            <td>Restrict</td>
+        </tr>
+        <tr>
+            <td>FK_commentaires_IDintervention</td>
+            <td>Restrict</td>
+            <td>Restrict</td>
+        </tr>
+        <tr>
+            <td>FK_interventions_immatriculation</td>
+            <td>Cascade</td>
+            <td>Cascade</td>
+        </tr>
+        <tr>
+            <td>FK_interventions_typeIntervention</td>
+            <td>No Action</td>
+            <td>No Action</td>
+        </tr>
+        <tr>
+            <td>FK_interventions_prixForfait</td>
+            <td>No Action</td>
+            <td>No Action</td>
+        </tr>
+        <tr>
+            <td>FK_repare_IDtechnicien</td>
+            <td>Restrict</td>
+            <td>Restrict</td>
+        </tr>
+        <tr>
+            <td>FK_repare_IDintervention</td>
+            <td>Restrict</td>
+            <td>Restrict</td>
+        </tr>
+    </table>
+    <p>
+        La création de la clé étrangère FK_interventions_prixForfait a nécéssité de créer un indrex sur l'attribut prixForfait dans la relation forfaits.
+    </p>
+    <h2>Peuplement initial de la base de données</h2>
+    <p>
+
     </p>
     </body>
 </html>
