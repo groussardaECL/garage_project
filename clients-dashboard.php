@@ -34,7 +34,6 @@
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Dashboard - Clients</h1>
-
             <h2 class="sub-header">Liste des clients</h2>
             <div class="table-responsive col-md-8">
                 <table class="table table-striped">
@@ -49,15 +48,15 @@
                     </thead>
                     <tbody>
                     <?php
-                    $reponse = $bdd->query('SELECT IDclient, c.nom as nomc, c.prenom as prenomc, nomCommune, r.nom as nomr, r.prenom as prenomr FROM clients as c, referents as r WHERE c.IDreferent=r.IDreferent;');
+                    $reponse = $bdd->query('SELECT IDclient, c.nom as nomc, c.prenom as prenomc, nomCommune, r.nom as nomr, r.prenom as prenomr, c.IDreferent FROM clients as c, referents as r WHERE c.IDreferent=r.IDreferent;');
                     while ($donnees = $reponse->fetch())
                     {
                         echo '<tr>';
-                        echo '<td>'.$donnees['IDclient'].'</td>';
-                        echo '<td>'.$donnees['nomc'].'</td>';
-                        echo '<td>'.$donnees['prenomc'].'</td>';
+                        echo '<td><a href="client.php?idclient='.$donnees['IDclient'].'">'.$donnees['IDclient'].'</a></td>';
+                        echo '<td><a href="client.php?idclient='.$donnees['IDclient'].'">'.$donnees['nomc'].'</a></td>';
+                        echo '<td><a href="client.php?idclient='.$donnees['IDclient'].'">'.$donnees['prenomc'].'</a></td>';
                         echo '<td>'.$donnees['nomCommune'].'</td>';
-                        echo '<td>'.$donnees['prenomr']. ' ' .$donnees['nomr']. '</td>';
+                        echo '<td><a href="referent.php?idreferent='.$donnees['IDreferent'].'">'.$donnees['prenomr']. ' ' .$donnees['nomr']. '</a></td>';
                         echo '<td>';
                         /**echo '<a class="delete" href="delete.php?ID='.$a['ID'].'"'.
                             ' onclick="return confirm(\'Voulez-vous vraiment supprimer ces Jeux Olympiques ?\')")>X</a>&nbsp;';
@@ -72,6 +71,30 @@
         </div>
     </div>
 </div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-footer col-sm-3 col-md-2">
+            <a class="navbar-brand" href="#">Actions</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-middle">
+                <li>
+                    <a href="add-client.php">
+                        <img src="img/add-icon.png" width="16" height="16" class="img" alt="+">
+                        Ajout d'un nouveau client
+                    </a>
+                </li>
+                <li>
+                    <a href="recherche-client.php">
+                        <img src="img/search-icon.png" width="16" height="16" class="img" alt="+">
+                        Recherche
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 </body>
 </html>
