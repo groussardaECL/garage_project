@@ -55,12 +55,15 @@
             </div>
 
             <div class="col-md-4">
-                <form class="form-signin" action="dashboard.php">
+                <form class="form-signin" method="POST" action="connexion.php">
                     <h2 class="form-signin-heading">Connexion</h2>
+
                     <label for="inputUser" class="sr-only">Nom d'utilisateur</label>
-                    <input type="text" id="inputUser" class="form-control" placeholder="Utilisateur" required autofocus>
+                    <input type="text" id="inputUser" class="form-control" placeholder="Utilisateur" required autofocus name="utilisateur">
+
                     <label for="inputPassword" class="sr-only">Mot de passe</label>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required name="passwordUser">
+
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
                 </form>
             </div>

@@ -1,6 +1,6 @@
 <?php
 
-
+/**
 if (isset($_POST['utilisateur']) and isset($_POST['passwordUser'])) {
 
     try
@@ -21,8 +21,9 @@ if (isset($_POST['utilisateur']) and isset($_POST['passwordUser'])) {
     }
 
 }
+*/
 
-/** Connexion à la base de données, avec récupération et affichage de l'erreur
+/** Connexion à la base de données, avec récupération et affichage de l'erreur */
 try
 {
     $bdd = new PDO('mysql:host=localhost:3306;dbname=bdd_garage','root','root');

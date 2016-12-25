@@ -1,4 +1,4 @@
-<?php require "connexion.php"; ?>
+<?php require "connexion2.php"; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <!-- From Bootstrap Example document -->
@@ -27,101 +27,87 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Garage d'Ecully</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Rapport</a></li>
-                    <li><a href="#">Déconnexion</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include "inc/header.html"; ?>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Vue d'ensemble<span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">Interventions</a></li>
-                    <li><a href="#">Clients</a></li>
-                    <li><a href="#">Véhicules</a></li>
-                    <li><a href="#">Forfaits</a></li>
-                    <li><a href="#">Personnel</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Recherche</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Statistiques Communes</a></li>
-                    <li><a href="">Statistiques Technicien</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Deconnexion</a></li>
-                </ul>
-            </div>
+            <?php include "inc/side-bar.html"; ?>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">Dashboard</h1>
 
                 <div class="row placeholders">
                     <div class="col-xs-6 col-sm-3 placeholder">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                        <a href="interventions-dashboard.php">
+                            <img src="img/tools.png" width="200" height="200" class="img-responsive bw" alt="Accès aux interventions">
+                        </a>
                         <h4>Interventions</h4>
-                        <a href="#" class="text-muted">Rechercher</a>
+                        <a href="#" class="text-muted">Nouveau</a> | <a href="#" class="text-muted">Rechercher</a>
                     </div>
                     <div class="col-xs-6 col-sm-3 placeholder">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                        <a href="clients-dashboard.php">
+                            <img src="img/client.png" width="200" height="200" class="img-responsive bw" alt="Accés aux clients">
+                        </a>
                         <h4>Clients</h4>
-                        <a href="#" class="text-muted">Rechercher</a>
+                        <a href="#" class="text-muted">Nouveau</a> | <a href="#" class="text-muted">Rechercher</a>
                     </div>
                     <div class="col-xs-6 col-sm-3 placeholder">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                        <a href="vehicules-dashboard.php">
+                            <img src="img/car.png" width="200" height="200" class="img-responsive bw" alt="Accés aux véhicules">
+                        </a>
                         <h4>Vehicules</h4>
-                        <a href="#" class="text-muted">Rechercher</a>
+                        <a href="#" class="text-muted">Nouveau</a> | <a href="#" class="text-muted">Rechercher</a>
                     </div>
                     <div class="col-xs-6 col-sm-3 placeholder">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                        <a href="personnel-dashboard.php">
+                            <img src="img/staff.png" width="200" height="200" class="img-responsive bw" alt="Accés aux personnel">
+                        </a>
                         <h4>Personnel</h4>
-                        <a href="#" class="text-muted">Rechercher</a>
+                        <a href="#" class="text-muted">Nouveau</a> | <a href="#" class="text-muted">Rechercher</a>
                     </div>
                 </div>
 
-                <h2 class="sub-header">Interventions récentes</h2>
-                <div class="table-responsive">
+                <h2 class="sub-header">Statistiques générales</h2>
+                <div class="table-responsive col-md-4">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Client</th>
-                            <th>Voiture</th>
-                            <th>Immatriculation</th>
-                            <th>Referent</th>
+                            <th>Elément</th>
+                            <th>Total</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>1,001</td>
-                            <td>Lorem</td>
-                            <td>ipsum</td>
-                            <td>dolor</td>
-                            <td>sit</td>
+                            <td>Interventions</td>
+                            <td>
+                                <?php
+                                $reponse = $bdd->query('SELECT COUNT(*) as totalinterventions FROM interventions');
+                                $donnees = $reponse->fetch();
+                                $reponse->closeCursor();
+                                echo $donnees['totalinterventions'];
+                                ?>
+                            </td>
                         </tr>
                         <tr>
-                            <td>1,002</td>
-                            <td>amet</td>
-                            <td>consectetur</td>
-                            <td>adipiscing</td>
-                            <td>elit</td>
+                            <td>Clients</td>
+                            <td>
+                                <?php
+                                $reponse = $bdd->query('SELECT COUNT(*) as totalclients FROM clients');
+                                $donnees = $reponse->fetch();
+                                $reponse->closeCursor();
+                                echo $donnees['totalclients'];
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Véhicules</td>
+                            <td>
+                                <?php
+                                $reponse = $bdd->query('SELECT COUNT(*) as totalvehicules FROM vehicules');
+                                $donnees = $reponse->fetch();
+                                $reponse->closeCursor();
+                                echo $donnees['totalvehicules'];
+                                ?>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
