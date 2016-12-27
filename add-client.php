@@ -38,7 +38,7 @@
 
             <!-- Form Template from ColorLib.com -->
             <div class="container">
-                <form id="contact" action="new-client.php" method="post">
+                <form id="contact" action="add-client.php" method="post">
                     <h3>Informations Client</h3>
                     <h4>Renseignez tous les champs</h4>
                     <fieldset>
@@ -93,6 +93,17 @@
         </div>
     </div>
 </nav>
+
+<?php
+
+if ( $_SERVER['REQUEST_METHOD'] != 'POST' ) die ('Illegal call');
+
+$bdd->exec('INSERT INTO clients(nom, prenom, nomCommune, IDreferent) VALUES (\''
+    .$_POST['nom']. '\',\''
+    .$_POST['prenom']. '\',\''
+    .$_POST['nomCommune']. '\','
+    .$_POST['referent']. ');') or die(mysqli_error());
+?>
 
 </body>
 </html>
