@@ -41,28 +41,28 @@
                             <img src="img/tools.png" width="200" height="200" class="img-responsive bw" alt="Accès aux interventions">
                         </a>
                         <h4>Interventions</h4>
-                        <a href="#" class="text-muted">Nouveau</a> | <a href="#" class="text-muted">Rechercher</a>
+                        <a href="add-intervention.php" class="text-muted">Nouveau</a> | <a href="find-intervention.php" class="text-muted">Rechercher</a>
                     </div>
                     <div class="col-xs-6 col-sm-3 placeholder">
                         <a href="clients-dashboard.php">
                             <img src="img/client.png" width="200" height="200" class="img-responsive bw" alt="Accés aux clients">
                         </a>
                         <h4>Clients</h4>
-                        <a href="#" class="text-muted">Nouveau</a> | <a href="#" class="text-muted">Rechercher</a>
+                        <a href="add-client.php" class="text-muted">Nouveau</a> | <a href="find-client.php" class="text-muted">Rechercher</a>
                     </div>
                     <div class="col-xs-6 col-sm-3 placeholder">
                         <a href="vehicules-dashboard.php">
                             <img src="img/car.png" width="200" height="200" class="img-responsive bw" alt="Accés aux véhicules">
                         </a>
                         <h4>Vehicules</h4>
-                        <a href="#" class="text-muted">Nouveau</a> | <a href="#" class="text-muted">Rechercher</a>
+                        <a href="add-vehicule.php" class="text-muted">Nouveau</a> | <a href="find-vehicule.php" class="text-muted">Rechercher</a>
                     </div>
                     <div class="col-xs-6 col-sm-3 placeholder">
                         <a href="personnel-dashboard.php">
                             <img src="img/staff.png" width="200" height="200" class="img-responsive bw" alt="Accés aux personnel">
                         </a>
                         <h4>Personnel</h4>
-                        <a href="#" class="text-muted">Nouveau</a> | <a href="#" class="text-muted">Rechercher</a>
+                        <a href="add-personnel.php" class="text-muted">Nouveau</a> | <a href="find-personnel.php" class="text-muted">Rechercher</a>
                     </div>
                 </div>
 

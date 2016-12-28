@@ -34,32 +34,24 @@
     <div class="row">
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Ajout d'un client</h1>
+            <h1 class="page-header">Ajout d'un véhicule</h1>
 
             <!-- Form Template from ColorLib.com -->
             <div class="container">
-                <form id="contact" action="add-client.php" method="post">
-                    <h3>Informations Client</h3>
+                <form id="contact" action="add-vehicule.php" method="post">
+                    <h3>Informations Véhicule</h3>
                     <h4>Renseignez tous les champs</h4>
                     <fieldset>
-                        <input placeholder="Nom" type="text" tabindex="1" name="nom" required autofocus>
+                        <input placeholder="N° d'immatriculation du véhicule" type="text" tabindex="1" name="immatriculation" required autofocus>
                     </fieldset>
                     <fieldset>
-                        <input placeholder="Prénom" type="text" tabindex="2" name="prenom" required>
+                        <input placeholder="Marque" type="text" tabindex="2" name="marque" required>
                     </fieldset>
                     <fieldset>
-                        <input placeholder="Commune" type="text" tabindex="3" name="nomCommune" required>
+                        <input placeholder="Modèle" type="text" tabindex="3" name="typeVehicule" required>
                     </fieldset>
-                    <h4>Indiquez le référent :</h4>
                     <fieldset>
-                        <select name="referent" required>
-                            <?php
-                            $reponse = $bdd->query('SELECT IDreferent, nom, prenom FROM referents');
-                            while ($donnees = $reponse->fetch()) {
-                                echo '<option value="' .$donnees['IDreferent']. '">' .$donnees['nom']. ' ' .$donnees['prenom']. '</option>';
-                            }
-                            ?>
-                        </select>
+                        <input placeholder="Année (ex : 2005)" type="number" tabindex="4" name="annee" required>
                     </fieldset>
                     <fieldset>
                         <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Ajout</button>
@@ -96,13 +88,14 @@
 </nav>
 
 <?php
+
 if ( $_SERVER['REQUEST_METHOD'] != 'POST' ) die ('Illegal call');
 
-$bdd->exec('INSERT INTO clients(nom, prenom, nomCommune, IDreferent) VALUES (\''
-    .$_POST['nom']. '\',\''
-    .$_POST['prenom']. '\',\''
-    .$_POST['nomCommune']. '\','
-    .$_POST['referent']. ');') or die(mysqli_error());
+$bdd->exec('INSERT INTO vehicules(immatriculation, typeVehicule, marque, annee) VALUES (\''
+    .$_POST['immatriculation']. '\',\''
+    .$_POST['typeVehicule']. '\',\''
+    .$_POST['marque']. '\','
+    .$_POST['annee']. ');') or die(mysqli_error());
 ?>
 
 </body>

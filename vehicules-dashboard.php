@@ -33,31 +33,30 @@
     <div class="row">
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard - Clients</h1>
+            <h1 class="page-header">Dashboard - Véhicules</h1>
 
-            <h2 class="sub-header">Liste des clients</h2>
+            <h2 class="sub-header">Liste des véhicules</h2>
             <div class="table-responsive col-md-8">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>ID Client</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Commune</th>
-                        <th>Reférent</th>
+                        <th>N° d'immatriculation</th>
+                        <th>Marque</th>
+                        <th>Modèle</th>
+                        <th>Année</th>
+                        <th>Propriétaire</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    $reponse = $bdd->query('SELECT IDclient, c.nom as nomc, c.prenom as prenomc, nomCommune, r.nom as nomr, r.prenom as prenomr FROM clients as c, referents as r WHERE c.IDreferent=r.IDreferent;');
+                    $reponse = $bdd->query('SELECT  immatriculation, typeVehicule, marque, annee FROM vehicules');
                     while ($donnees = $reponse->fetch())
                     {
                         echo '<tr>';
-                        echo '<td>'.$donnees['IDclient'].'</td>';
-                        echo '<td>'.$donnees['nomc'].'</td>';
-                        echo '<td>'.$donnees['prenomc'].'</td>';
-                        echo '<td>'.$donnees['nomCommune'].'</td>';
-                        echo '<td>'.$donnees['prenomr']. ' ' .$donnees['nomr']. '</td>';
+                        echo '<td>'.$donnees['immatriculation'].'</td>';
+                        echo '<td>'.$donnees['marque'].'</td>';
+                        echo '<td>'.$donnees['typeVehicule'].'</td>';
+                        echo '<td>'.$donnees['annee'].'</td>';
                         echo '<td>';
                         /**echo '<a class="delete" href="delete.php?ID='.$a['ID'].'"'.
                             ' onclick="return confirm(\'Voulez-vous vraiment supprimer ces Jeux Olympiques ?\')")>X</a>&nbsp;';
