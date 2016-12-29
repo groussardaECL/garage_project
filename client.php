@@ -32,9 +32,8 @@
 <div class="container-fluid">
     <div class="row">
         <?php include "inc/side-bar.html"; ?>
-        <?php echo $_GET['IDclient']; ?>
         <?php
-            $reponse = $bdd->query('SELECT * FROM clients WHERE IDclient=$_GET[IDclient]');
+            $reponse = $bdd->query("SELECT IDclient, c.nom as nomc, c.prenom as prenomc, nomCommune FROM clients as c WHERE IDclient='$_GET[idclient]'");
             $donnees = $reponse->fetch();
         ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

@@ -55,7 +55,7 @@
                             <img src="img/car.png" width="200" height="200" class="img-responsive bw" alt="Accés aux véhicules">
                         </a>
                         <h4>Vehicules</h4>
-                        <a href="add-vehicule.php" class="text-muted">Nouveau</a> | <a href="find-vehicule.php" class="text-muted">Rechercher</a>
+                        <a href="add-vehicule.php" class="text-muted">Nouveau</a> | <a href="modify-vehicule.php" class="text-muted">Modifier</a> | <a href="find-vehicule.php" class="text-muted">Rechercher</a>
                     </div>
                     <div class="col-xs-6 col-sm-3 placeholder">
                         <a href="personnel-dashboard.php">
