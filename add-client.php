@@ -83,12 +83,6 @@
                         Ajout d'un nouveau client
                     </a>
                 </li>
-                <li>
-                    <a href="recherche-client.php">
-                        <img src="img/search-icon.png" width="16" height="16" class="img" alt="+">
-                        Recherche
-                    </a>
-                </li>
             </ul>
         </div>
     </div>

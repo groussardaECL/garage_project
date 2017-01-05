@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -100,15 +101,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-middle">
                 <li>
-                    <a href="add-client.php">
+                    <a href="add-intervention.php">
                         <img src="img/add-icon.png" width="16" height="16" class="img" alt="+">
-                        Ajout d'un nouveau client
-                    </a>
-                </li>
-                <li>
-                    <a href="recherche-client.php">
-                        <img src="img/search-icon.png" width="16" height="16" class="img" alt="+">
-                        Recherche
+                        Ajout d'une nouvelle intervention
                     </a>
                 </li>
             </ul>

@@ -65,15 +65,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-middle">
                 <li>
-                    <a href="add-client.php">
+                    <a href="add-forfait.php">
                         <img src="img/add-icon.png" width="16" height="16" class="img" alt="+">
-                        Ajout d'un nouveau client
-                    </a>
-                </li>
-                <li>
-                    <a href="recherche-client.php">
-                        <img src="img/search-icon.png" width="16" height="16" class="img" alt="+">
-                        Recherche
+                        Ajout d'un nouveau forfait
                     </a>
                 </li>
             </ul>
