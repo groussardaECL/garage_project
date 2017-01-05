@@ -36,7 +36,7 @@
     $req = $bdd->query('SELECT * FROM vehicules')->fetchAll();
     $present = false;
 
-    foreach ($req as $elem) {                           // Vérification dans la base de données si le pays existe déjà
+    foreach ($req as $elem) {
         if ($elem['immatriculation'] == $_POST['immatriculation']) {
             $present = true;
             break;
@@ -48,11 +48,12 @@
 
         $repa = $_POST['reparation'];
 
-        if ($repa != 'oui') {
+        if ($repa != 'forfaitaire') {
 
-            $req1 = $bdd->prepare('INSERT INTO interventions(typeIntervention, prixPiece, prixMainOeuvre, kilometrage, dateArrivee, immatriculation) VALUES (:typeIntervention, :prixPiece, :prixMainOeuvre, :kilometrage, :dateArrivee, :immatriculation)');
+            $req1 = $bdd->prepare('INSERT INTO interventions(typeIntervention, Designation, prixPiece, prixMainOeuvre, kilometrage, dateArrivee, immatriculation) VALUES (:typeIntervention, :Designation, :prixPiece, :prixMainOeuvre, :kilometrage, :dateArrivee, :immatriculation)');
             $req1->execute(array(
-                'typeIntervention' => $_POST['typeIntervention'],
+                'typeIntervention' => $_POST['forfait'],
+                'Designation' => $_POST['Designation'],
                 'prixPiece' => $_POST['pieces'],
                 'prixMainOeuvre' => $_POST['mdo'],
                 'kilometrage' => $_POST['km'],
@@ -62,15 +63,15 @@
 
         };
 
-        if ($repa != 'non') {
+        if ($repa != 'nonforfaitaire') {
 
             $req2 = $bdd->query("SELECT prixForfait FROM forfaits WHERE typeIntervention='$_POST[forfait]'");
             $donnees = $req2->fetch();
 
-            $req3 = $bdd->prepare('INSERT INTO interventions(typeIntervention, prixForfait, prixPiece, prixMainOeuvre, kilometrage, dateArrivee, immatriculation) VALUES (:typeIntervention, :prixForfait, :prixPiece, :prixMainOeuvre, :kilometrage, :dateArrivee, :immatriculation)');
+            $req3 = $bdd->prepare('INSERT INTO interventions(typeIntervention, Designation, prixPiece, prixMainOeuvre, kilometrage, dateArrivee, immatriculation) VALUES (:typeIntervention, :Designation, :prixPiece, :prixMainOeuvre, :kilometrage, :dateArrivee, :immatriculation)');
             $req3->execute(array(
                 'typeIntervention' => $_POST['forfait'],
-                'prixForfait' => $donnees['prixForfait'],
+                'Designation' => 'NULL',
                 'prixPiece' => 0,
                 'prixMainOeuvre' => 0,
                 'kilometrage' => $_POST['km'],
@@ -78,16 +79,16 @@
                 'immatriculation' => $_POST['immatriculation'],
             )) or die(print_r($req3->errorInfo()));
 
-            $req4 = $bdd->query("SELECT MAX(IDintervention) FROM interventions");
-            $donnees4 = $req4->fetch();
-
-
-            $req5 = $bdd->prepare('INSERT INTO repare(IDtechnicien, IDintervention) VALUES (:IDtechnicien, :IDintervention)');
-            $req5->execute(array(
-                'IDtechnicien' => $_POST['technicien'],
-                'IDintervention' => $donnees4['MAX(IDintervention)']));
-
         };
+
+
+        $req4 = $bdd->query("SELECT MAX(IDintervention) FROM interventions");
+        $donnees4 = $req4->fetch();
+
+        $req5 = $bdd->prepare('INSERT INTO repare(IDtechnicien, IDintervention) VALUES (:IDtechnicien, :IDintervention)');
+        $req5->execute(array(
+            'IDtechnicien' => $_POST['technicien'],
+            'IDintervention' => $donnees4['MAX(IDintervention)']));
     ?>
         <div class="container-fluid">
             <div class="row">

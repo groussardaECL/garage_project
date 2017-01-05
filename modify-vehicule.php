@@ -106,16 +106,7 @@ if (!isset($_POST['immatriculation']) or (isset($_POST['immatriculation']) and (
                     <h4>Indiquez d'abord le N° d'immatriculation du véhicule</h4>
                     <?php if (isset($_POST['immatriculation']) and (!$present)) echo '<h4 style="color:darkred;"> Véhicule inexistant !</h4>'; ?>
                     <fieldset>
-
-                        <select name="immatriculation" required>
-                            <?php
-                            $reponse = $bdd->query('SELECT immatriculation FROM vehicules');
-                            while ($donnees = $reponse->fetch()) {
-                                echo '<option value="' .$donnees['immatriculation']. '">' .$donnees['immatriculation'].'</option>';
-
-                            }
-                            ?>
-                        </select>
+                        <input placeholder="N° d'immatriculation du véhicule" type="text" tabindex="1" name="immatriculation" required autofocus>
                     </fieldset>
                     <h4>Renseignez les nouvelles informations</h4>
                     <fieldset>

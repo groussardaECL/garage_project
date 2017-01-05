@@ -82,15 +82,15 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-middle">
                 <li>
-                    <a href="add-vehicule.php">
+                    <a href="add-client.php">
                         <img src="img/add-icon.png" width="16" height="16" class="img" alt="+">
-                        Ajout d'un nouveau véhicule
+                        Ajout d'un nouveau client
                     </a>
                 </li>
                 <li>
-                    <a href="modify-vehicule.php">
-                        <img src="img/modify-icon.png" width="16" height="16" class="img" alt="+">
-                        Modifier un nouveau véhicule
+                    <a href="recherche-client.php">
+                        <img src="img/search-icon.png" width="16" height="16" class="img" alt="+">
+                        Recherche
                     </a>
                 </li>
             </ul>

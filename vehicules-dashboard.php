@@ -52,9 +52,9 @@
                     $reponse = $bdd->query('SELECT  immatriculation, typeVehicule, marque, annee FROM vehicules');
                     while ($donnees = $reponse->fetch())
                     {
-                        $reponse2 = $bdd->query('SELECT c.prenom as prenomc, c.nom as nomc FROM clients as c, appartient as a WHERE a.immatriculation='.$donnees['immatriculation'].' AND a.IDclient=c.IDclient');
-                        while ($donnees2 = $reponse2->fetch())
-                        {
+                        $reponse2 = $bdd->query("SELECT  a.IDclient, c.nom as nomc, c.prenom as prenomc FROM appartient as a, clients as c WHERE a.immatriculation=$donnees[immatriculation] AND a.IDclient=c.IDclient");
+                        while ($donnees2 = $reponse2 ->fetch()) {
+
                             echo '<tr>';
                             echo '<td>' . $donnees['immatriculation'] . '</td>';
                             echo '<td>' . $donnees['marque'] . '</td>';

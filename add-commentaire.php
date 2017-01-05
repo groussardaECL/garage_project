@@ -11,7 +11,7 @@
     <meta name="author" content="Arnaud Groussard">
     <link rel="icon" href="favicon.ico">
 
-    <title>Garage - Personnel</title>
+    <title>Garage - Clients</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -34,24 +34,27 @@
     <div class="row">
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Ajout d'un employé</h1>
+            <h1 class="page-header">Ajout d'un commentaire</h1>
 
             <!-- Form Template from ColorLib.com -->
             <div class="container">
-                <form id="contact" action="added-personnel.php" method="post">
-                    <h3>Informations Employé</h3>
-                    <h4>Renseignez tous les champs</h4>
+                <form id="contact" action="added-commentaire.php" method="post">
+                    <h3>Informations Commentaire</h3>
+                    <h4>Allez sur le Dashboard Interventions pour connaitre l'ID :</h4>
                     <fieldset>
-                        <input placeholder="Nom" type="text" tabindex="1" name="nom" required autofocus>
+                        <input placeholder="ID de l'intervention" type="number" tabindex="1" name="intervention" required autofocus>
                     </fieldset>
                     <fieldset>
-                        <input placeholder="Prénom" type="text" tabindex="2" name="prenom" required>
+                        <textarea name="commentaire" id="commentaire" required>Tapez votre commentaire ici.</textarea>
                     </fieldset>
-                    <h4>Choisissez le rôle :</h4>
+                    <h4>Indiquez l'auteur du commentaire :</h4>
                     <fieldset>
-                        <select name="job" required>
+                        <select name="technicien" required>
                             <?php
-                                echo '<option value="techniciens">Technicien</option><option value="referents">Référent</option>';
+                            $reponse = $bdd->query('SELECT IDtechnicien, nom, prenom FROM techniciens');
+                            while ($donnees = $reponse->fetch()) {
+                                echo '<option value="' .$donnees['IDtechnicien']. '">' .$donnees['nom']. ' ' .$donnees['prenom']. '</option>';
+                            }
                             ?>
                         </select>
                     </fieldset>
@@ -60,7 +63,6 @@
                     </fieldset>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
@@ -88,6 +90,7 @@
         </div>
     </div>
 </nav>
+
 
 
 </body>
