@@ -40,25 +40,24 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>ID Client</th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                        <th>Commune</th>
-                        <th>Reférent</th>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Voiture</th>
+                        <th>Techniciens</th>
+                        <th>Nombre de commentaires</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    $reponse = $bdd->query('SELECT IDclient, c.nom as nomc, c.prenom as prenomc, nomCommune, r.nom as nomr, r.prenom as prenomr FROM clients as c, referents as r WHERE c.IDreferent=r.IDreferent;');
+                    $reponse = $bdd->query('SELECT i.IDintervention as IDinterv, typeIntervention, i.immatriculation as immat, r.IDtechnicien, t.prenom as prenomt, t.nom as nomt, marque, annee FROM interventions as i, techniciens as t, repare as r, vehicules as v, commentaires as c WHERE r.IDtechnicien=t.IDtechnicien AND i.immatriculation=v.immatriculation;');
                     while ($donnees = $reponse->fetch())
                     {
                         echo '<tr>';
-                        echo '<td>'.$donnees['IDclient'].'</td>';
-                        echo '<td>'.$donnees['nomc'].'</td>';
-                        echo '<td>'.$donnees['prenomc'].'</td>';
-                        echo '<td>'.$donnees['nomCommune'].'</td>';
-                        echo '<td>'.$donnees['prenomr']. ' ' .$donnees['nomr']. '</td>';
-                        echo '<td>';
+                        echo '<td>'.$donnees['IDinterv'].'</td>';
+                        echo '<td>'.$donnees['typeIntervention'].'</td>';
+                        echo '<td>'.$donnees['immat'].' ('.$donnees['marque'].' - '.$donnees['annee'].')</td>';
+                        echo '<td>'.$donnees['prenomt'].' '.$donnees['nomt'].'</td>';
+                        echo '<td>A calculer</td>';
                         /**echo '<a class="delete" href="delete.php?ID='.$a['ID'].'"'.
                             ' onclick="return confirm(\'Voulez-vous vraiment supprimer ces Jeux Olympiques ?\')")>X</a>&nbsp;';
                         echo '<a href="detail.php?ID='.$a['ID'].'">'.$a['Annee'].'</a>';

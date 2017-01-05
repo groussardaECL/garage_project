@@ -37,6 +37,7 @@
             <h1 class="page-header">Ajout d'un client</h1>
 
             <!-- Form Template from ColorLib.com -->
+
             <div class="container">
                 <form id="contact" action="add-client.php" method="post">
                     <h3>Informations Client</h3>
@@ -66,7 +67,6 @@
                     </fieldset>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
