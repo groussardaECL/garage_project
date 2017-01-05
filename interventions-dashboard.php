@@ -33,36 +33,44 @@
     <div class="row">
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard - Clients</h1>
+            <h1 class="page-header">Dashboard - Interventions</h1>
 
-            <h2 class="sub-header">Liste des clients</h2>
+            <h2 class="sub-header">Liste des interventions</h2>
             <div class="table-responsive col-md-8">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Type</th>
-                        <th>Voiture</th>
-                        <th>Techniciens</th>
-                        <th>Nombre de commentaires</th>
+                        <th>ID Intervention</th>
+                        <th>Désignation</th>
+                        <th>Prix Forfait</th>
+                        <th>Prix pièces</th>
+                        <th>Prix main d'oeuvre</th>
+                        <th>Immatriculation véhicule entrant</th>
+                        <th>Kilométrage</th>
+                        <th>Date d'entrée</th>
+                        <th>Technicien</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    $reponse = $bdd->query('SELECT i.IDintervention as IDinterv, typeIntervention, i.immatriculation as immat, r.IDtechnicien, t.prenom as prenomt, t.nom as nomt, marque, annee FROM interventions as i, techniciens as t, repare as r, vehicules as v, commentaires as c WHERE r.IDtechnicien=t.IDtechnicien AND i.immatriculation=v.immatriculation;');
+                    $reponse = $bdd->query('SELECT  IDintervention, typeIntervention, prixForfait, prixPiece, prixMainOeuvre, kilometrage, dateArrivee, immatriculation FROM interventions');
                     while ($donnees = $reponse->fetch())
                     {
-                        echo '<tr>';
-                        echo '<td>'.$donnees['IDinterv'].'</td>';
-                        echo '<td>'.$donnees['typeIntervention'].'</td>';
-                        echo '<td>'.$donnees['immat'].' ('.$donnees['marque'].' - '.$donnees['annee'].')</td>';
-                        echo '<td>'.$donnees['prenomt'].' '.$donnees['nomt'].'</td>';
-                        echo '<td>A calculer</td>';
-                        /**echo '<a class="delete" href="delete.php?ID='.$a['ID'].'"'.
-                            ' onclick="return confirm(\'Voulez-vous vraiment supprimer ces Jeux Olympiques ?\')")>X</a>&nbsp;';
-                        echo '<a href="detail.php?ID='.$a['ID'].'">'.$a['Annee'].'</a>';
-                        echo '</td>'; */
-                        echo '</tr>';
+                        $reponse2 = $bdd->query("SELECT  r.IDtechnicien, t.nom as nomt, t.prenom as prenomt FROM repare as r, techniciens as t WHERE r.IDintervention=$donnees[IDintervention] AND r.IDtechnicien=t.IDtechnicien");
+                        while ($donnees2 = $reponse2 ->fetch()) {
+
+                            echo '<tr>';
+                            echo '<td>' . $donnees['IDintervention'] . '</td>';
+                            echo '<td>' . $donnees['typeIntervention'] . '</td>';
+                            echo '<td>' . $donnees['prixForfait'] . '</td>';
+                            echo '<td>' . $donnees['prixPiece'] . '</td>';
+                            echo '<td>' . $donnees['prixMainOeuvre'] . '</td>';
+                            echo '<td>' . $donnees['immatriculation'] . '</td>';
+                            echo '<td>' . $donnees['kilometrage'] . '</td>';
+                            echo '<td>' . $donnees['dateArrivee'] . '</td>';
+                            echo '<td>'. $donnees2['prenomt'] . ' '. $donnees2['nomt'] . '</td>';
+                            echo '</tr>';
+                        }
                     }
                     ?>
                     </tbody>

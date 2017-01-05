@@ -50,7 +50,7 @@ if (!$present) {
         . $_POST['marque'] . '\','
         . $_POST['annee'] . ');');
 
-    $req2 = $bdd->prepare('INSERT INTO appartient (IDclient, immatriculation) VALUES(:IDclient, :immatriculation)');
+    $req2 = $bdd->prepare('INSERT INTO appartient(IDclient, immatriculation) VALUES(:IDclient, :immatriculation)');
     $req2->execute(array(
         'IDclient' => $_POST['client'],
         'immatriculation' => $_POST['immatriculation'],

@@ -57,7 +57,6 @@
                         echo '<td><a href="client.php?idclient='.$donnees['IDclient'].'">'.$donnees['prenomc'].'</a></td>';
                         echo '<td>'.$donnees['nomCommune'].'</td>';
                         echo '<td><a href="referent.php?idreferent='.$donnees['IDreferent'].'">'.$donnees['prenomr']. ' ' .$donnees['nomr']. '</a></td>';
-                        echo '<td>';
                         /**echo '<a class="delete" href="delete.php?ID='.$a['ID'].'"'.
                             ' onclick="return confirm(\'Voulez-vous vraiment supprimer ces Jeux Olympiques ?\')")>X</a>&nbsp;';
                         echo '<a href="detail.php?ID='.$a['ID'].'">'.$a['Annee'].'</a>';

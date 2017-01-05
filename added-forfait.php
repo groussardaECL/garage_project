@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Garage - Dashboard</title>
+    <title>Garage - Forfaits</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -32,11 +32,12 @@
 <?php
 if ( $_SERVER['REQUEST_METHOD'] != 'POST' ) die ('Illegal call');
 
-$bdd->exec('INSERT INTO clients(nom, prenom, nomCommune, IDreferent) VALUES (\''
-    .$_POST['nom']. '\',\''
-    .$_POST['prenom']. '\',\''
-    .$_POST['nomCommune']. '\','
-    .$_POST['referent']. ');') or die(mysqli_error());
+    $req1 = $bdd->prepare('INSERT INTO forfaits(typeIntervention, prixForfait) VALUES (:typeIntervention, :prixForfait)');
+    $req1->execute(array(
+        'typeIntervention' => $_POST['typeIntervention'],
+        'prixForfait' => $_POST['prixForfait'],
+    ));
+
 ?>
 
 <div class="container-fluid">
@@ -44,26 +45,23 @@ $bdd->exec('INSERT INTO clients(nom, prenom, nomCommune, IDreferent) VALUES (\''
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">
-             Client ajouté !
+                Forfait ajouté!
             </h1>
 
             <div class="col-xs-6 col-sm-3 placeholder">
-                <a href="client-dashboard.php">
-                    <img src="img/client.png" width="200" height="200" class="img-responsive bw" alt="Accés aux clients">
+                <a href="interventions-dashboard.php">
+                    <img src="img/tools.png" width="200" height="200" class="img-responsive bw" alt="Accés aux interventions">
                 </a>
-                <h4> Le client
+                <h4> Le forfait
                     <?php
-                    echo $_POST['prenom'].' '.$_POST['nom'];
+                    echo $_POST['typeIntervention'];
                     ?>
-                     a bien été ajouté à la base de données.
+                    a bien été ajouté à la base de données.
                 </h4>
-                <a href="add-client.php" class="text-muted">Ajouter un autre client</a> | <a href="modify-client.php" class="text-muted">Modifier un client</a> | <a href="find-client.php" class="text-muted">Rechercher</a>
+                <a href="add-forfait.php" class="text-muted">Ajouter un autre forfait</a> | <a href="modify-forfait.php" class="text-muted">Modifier</a> | <a href="find-forfait.php" class="text-muted">Rechercher</a>
             </div>
         </div>
     </div>
 </div>
-</div>
-
 </body>
-
 </html>

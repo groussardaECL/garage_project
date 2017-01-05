@@ -38,3 +38,11 @@ catch (Exception $e)
  * Date: 21/12/2016
  * Time: 21:36
  */
+
+
+
+
+$req4 = $bdd->prepare('INSERT INTO repare(IDtechnicien, IDintervention) VALUES(:IDtechnicien, :IDintervention)');
+$req4->execute(array(
+    'IDtechnicien' => $_POST['technicien'],
+    'IDintervention' => $donnees3['IDintervention']));

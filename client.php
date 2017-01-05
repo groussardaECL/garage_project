@@ -52,6 +52,20 @@
                                 <td>Commune</b></td>
                                 <td colspan="14"><?php echo $donnees['nomCommune']; ?></td>
                             </tr>
+                            <tr>
+                                <td>Véhicules</b></td>
+                                <td colspan="14">
+                                    <?php
+                                    $reponse1 = $bdd->query("SELECT  immatriculation FROM appartient WHERE IDclient='$_GET[idclient]'");
+                                    while ($donnees1 = $reponse1->fetch())
+                                    {$vehicule=$donnees1['immatriculation'];
+
+                                    $reponse2 = $bdd->prepare("SELECT v.typeVehicule as typeVehiculev, v.marque as marquev, v.annee as anneev FROM vehicules as v WHERE v.immatriculation='".$vehicule."'");
+                                    $donnees2 = $reponse2->execute() or die(print_r($reponse2->errorInfo()));
+
+                                    echo '<a href="vehicule.php?immatriculation='.$donnees2['immatriculation'].'">'.$donnees2['marquev']. $donnees2['typeVehiculev']. ' de '.$donnees2['anneev'].'</a>';
+                                    }; ?></td>
+                            </tr>
                 </table>
             </div>
         </div>

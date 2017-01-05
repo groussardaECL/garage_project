@@ -33,38 +33,82 @@
     <div class="row">
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard - Clients</h1>
+            <h1 class="page-header">Dashboard - Personnel</h1>
 
-            <h2 class="sub-header">Liste des clients</h2>
+            <div class="container">
+                <form id="contact" action="personnel-dashboard.php" method="post">
+                    <h3>Choisissez le poste :</h3>
+                    <fieldset>
+                        <select name="job" required>
+                            <?php
+                            echo '<option value="techniciens">Techniciens</option><option value="referents">Référents</option>';
+                            ?>
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Valider</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="container">
+            <?php if (isset($_POST['job'])) { ?>
+            <?php $job = $_POST['job']; ?>
+            <h3 class="sub-header">Liste des
+                <?php if ($job != 'referents') {
+                    echo 'techniciens';
+                };
+                if ($job != 'techniciens') {
+                    echo 'référents';
+                }; ?></h3>
             <div class="table-responsive col-md-8">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>ID Client</th>
+                        <th>ID <?php if ($job != 'referents') {
+                                echo 'techniciens';
+                            };
+                            if ($job != 'techniciens') {
+                                echo 'référents';
+                            }; ?></th>
                         <th>Nom</th>
                         <th>Prénom</th>
-                        <th>Commune</th>
-                        <th>Reférent</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    $reponse = $bdd->query('SELECT IDclient, c.nom as nomc, c.prenom as prenomc, nomCommune, r.nom as nomr, r.prenom as prenomr FROM clients as c, referents as r WHERE c.IDreferent=r.IDreferent;');
-                    while ($donnees = $reponse->fetch())
-                    {
-                        echo '<tr>';
-                        echo '<td>'.$donnees['IDclient'].'</td>';
-                        echo '<td>'.$donnees['nomc'].'</td>';
-                        echo '<td>'.$donnees['prenomc'].'</td>';
-                        echo '<td>'.$donnees['nomCommune'].'</td>';
-                        echo '<td>'.$donnees['prenomr']. ' ' .$donnees['nomr']. '</td>';
-                        echo '<td>';
+                        if ($job != 'referents') {
+                            $reponse = $bdd->query('SELECT IDtechnicien, t.nom as nomt, t.prenom as prenomt FROM techniciens as t;');
+                            while ($donnees = $reponse->fetch() OR $donnees2 = $reponse->fetch()) {
+                                echo '<tr>';
+                                echo '<td>' . $donnees['IDtechnicien'] . '</td>';
+                                echo '<td>' . $donnees['nomt'] . '</td>';
+                                echo '<td>' . $donnees['prenomt'] . '</td>';
+                                echo '<td>';
+                                echo '</tr>';
+                            }
+                        };
+                        if ($job != 'techniciens') {
+                            $reponse = $bdd->query('SELECT IDreferent, r.nom as nomr, r.prenom as prenomr FROM referents as r;');
+                            while ($donnees = $reponse->fetch() OR $donnees2 = $reponse->fetch()) {
+                            echo '<tr>';
+                            echo '<td>' . $donnees['IDreferent'] . '</td>';
+                            echo '<td>' . $donnees['nomr'] . '</td>';
+                            echo '<td>' . $donnees['prenomr'] . '</td>';
+                            echo '<td>';
+                            echo '</tr>';
+                        }
+                        };
                         /**echo '<a class="delete" href="delete.php?ID='.$a['ID'].'"'.
-                            ' onclick="return confirm(\'Voulez-vous vraiment supprimer ces Jeux Olympiques ?\')")>X</a>&nbsp;';
-                        echo '<a href="detail.php?ID='.$a['ID'].'">'.$a['Annee'].'</a>';
-                        echo '</td>'; */
-                        echo '</tr>';
-                    }
+                         * ' onclick="return confirm(\'Voulez-vous vraiment supprimer ces Jeux Olympiques ?\')")>X</a>&nbsp;';
+                         * echo '<a href="detail.php?ID='.$a['ID'].'">'.$a['Annee'].'</a>';
+                         * echo '</td>'; */
+                    };
                     ?>
                     </tbody>
                 </table>

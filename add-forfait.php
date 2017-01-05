@@ -34,26 +34,18 @@
     <div class="row">
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Ajout d'un employé</h1>
+            <h1 class="page-header">Ajout d'un forfait</h1>
 
             <!-- Form Template from ColorLib.com -->
             <div class="container">
-                <form id="contact" action="added-personnel.php" method="post">
-                    <h3>Informations Employé</h3>
+                <form id="contact" action="added-forfait.php" method="post">
+                    <h3>Informations forfait</h3>
                     <h4>Renseignez tous les champs</h4>
                     <fieldset>
-                        <input placeholder="Nom" type="text" tabindex="1" name="nom" required autofocus>
+                        <input placeholder="Désignation" type="text" tabindex="1" name="typeIntervention" required autofocus>
                     </fieldset>
                     <fieldset>
-                        <input placeholder="Prénom" type="text" tabindex="2" name="prenom" required>
-                    </fieldset>
-                    <h4>Choisissez le rôle :</h4>
-                    <fieldset>
-                        <select name="job" required>
-                            <?php
-                                echo '<option value="techniciens">Technicien</option><option value="referents">Référent</option>';
-                            ?>
-                        </select>
+                        <input placeholder="Prix" type="text" tabindex="2" name="prixForfait" required>
                     </fieldset>
                     <fieldset>
                         <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Ajout</button>

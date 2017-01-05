@@ -32,11 +32,28 @@
 <?php
 if ( $_SERVER['REQUEST_METHOD'] != 'POST' ) die ('Illegal call');
 
-$bdd->exec('INSERT INTO clients(nom, prenom, nomCommune, IDreferent) VALUES (\''
-    .$_POST['nom']. '\',\''
-    .$_POST['prenom']. '\',\''
-    .$_POST['nomCommune']. '\','
-    .$_POST['referent']. ');') or die(mysqli_error());
+$job=$_POST['job'];
+
+if ($job!='referents') {
+
+    $req1 = $bdd->prepare('INSERT INTO techniciens(nom, prenom) VALUES (:nom, :prenom)');
+    $req1->execute(array(
+        'nom' => $_POST['nom'],
+        'prenom' => $_POST['prenom'],
+    ));
+
+};
+
+if ($job!='techniciens') {
+
+    $req2 = $bdd->prepare('INSERT INTO referents(nom, prenom) VALUES (:nom, :prenom)');
+    $req2->execute(array(
+        'nom' => $_POST['nom'],
+        'prenom' => $_POST['prenom'],
+    ));
+
+};
+
 ?>
 
 <div class="container-fluid">
@@ -44,26 +61,23 @@ $bdd->exec('INSERT INTO clients(nom, prenom, nomCommune, IDreferent) VALUES (\''
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">
-             Client ajouté !
+                Employé ajouté!
             </h1>
 
             <div class="col-xs-6 col-sm-3 placeholder">
-                <a href="client-dashboard.php">
-                    <img src="img/client.png" width="200" height="200" class="img-responsive bw" alt="Accés aux clients">
+                <a href="personnel-dashboard.php">
+                    <img src="img/staff.png" width="200" height="200" class="img-responsive bw" alt="Accés au personnel">
                 </a>
-                <h4> Le client
+                <h4> L'employé
                     <?php
                     echo $_POST['prenom'].' '.$_POST['nom'];
                     ?>
-                     a bien été ajouté à la base de données.
+                    a bien été ajouté à la base de données.
                 </h4>
-                <a href="add-client.php" class="text-muted">Ajouter un autre client</a> | <a href="modify-client.php" class="text-muted">Modifier un client</a> | <a href="find-client.php" class="text-muted">Rechercher</a>
+                <a href="add-personnel.php" class="text-muted">Ajouter un autre employé</a> | <a href="modify-personnel.php" class="text-muted">Modifier un employé</a> | <a href="find-personnel.php" class="text-muted">Rechercher</a>
             </div>
         </div>
     </div>
 </div>
-</div>
-
 </body>
-
 </html>
