@@ -11,14 +11,13 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>Garage - Interventions</title>
+    <title>Garage - Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-    <link href="css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -27,6 +26,8 @@
     <![endif]-->
 </head>
 <body>
+
+
 <?php include "inc/header.html"; ?>
 
 <div class="container-fluid">
@@ -40,7 +41,7 @@
                                     <h4>Choisissez le type de prestation :</h4>
                                     <fieldset>
                                         <select name="reparation" required>
-                                           <option value="oui">Forfait</option><option value="non">Non-forfaitaire</option>';
+                                           <option value="forfaitaire">Forfait</option><option value="nonforfaitaire">Non-forfaitaire</option>';
                                         </select>
                                     </fieldset>
                                     <h4>Renseignez les champs ci-dessous :</h4>
@@ -53,17 +54,7 @@
                                     <fieldset>
                                         <input placeholder="Date d'entrée du véhicule" type="date" tabindex="3" name="date" required>
                                     </fieldset>
-                                    <h4>S'il s'agit d'une prestation non forfaitaire</h4>
-                                    <fieldset>
-                                        <input placeholder="Type d'intervention" type="text" tabindex="4" name="typeIntervention">
-                                    </fieldset>
-                                    <fieldset>
-                                        <input placeholder="Prix des pièces en €" type="number" tabindex="5" name="pieces">
-                                    </fieldset>
-                                    <fieldset>
-                                        <input placeholder="Prix main d'oeuvre en €" type="number" tabindex="6" name="mdo">
-                                    </fieldset>
-                                    <h4>S'il s'agit d'un forfait :</h4>
+                                    <h4>Choisissez le forfait :</h4>
                                     <fieldset>
                                         <select name="forfait">
                                             <?php
@@ -74,13 +65,33 @@
                                             ?>
                                         </select>
                                     </fieldset>
-                                    <h4>Indiquez le technicien en charge :</h4>
+                                    <h4>S'il s'agit d'une prestation non forfaitaire</h4>
+                                    <fieldset>
+                                        <input placeholder="Désignation" type="text" tabindex="4" name="Designation">
+                                    </fieldset>
+                                    <fieldset>
+                                        <input placeholder="Prix des pièces en €" type="number" tabindex="5" name="pieces">
+                                    </fieldset>
+                                    <fieldset>
+                                        <input placeholder="Prix main d'oeuvre en €" type="number" tabindex="6" name="mdo">
+                                    </fieldset>
+                                    <h4>Indiquez le(s) technicien(s) en charge :</h4>
                                     <fieldset>
                                         <select name="technicien" required>
                                             <?php
                                             $reponse = $bdd->query('SELECT IDtechnicien, nom, prenom FROM techniciens');
-                                            while ($donnees = $reponse->fetch()) {
-                                                echo '<option value="' .$donnees['IDtechnicien']. '">' .$donnees['prenom']. ' ' .$donnees['nom']. '</option>';
+                                            while ($donnees_technicien = $reponse->fetch()) {
+                                                echo '<option value="' .$donnees_technicien['IDtechnicien']. '">' .$donnees_technicien['prenom']. ' ' .$donnees_technicien['nom']. '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </fieldset>
+                                    <fieldset>
+                                        <select name="technicien-2" required>
+                                            <?php
+                                            $reponse = $bdd->query('SELECT IDtechnicien, nom, prenom FROM techniciens');
+                                            while ($donnees_technicien2 = $reponse->fetch()) {
+                                                echo '<option value="' .$donnees_technicien2['IDtechnicien']. '">' .$donnees_technicien['prenom']. ' ' .$donnees_technicien['nom']. '</option>';
                                             }
                                             ?>
                                         </select>
@@ -101,9 +112,15 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-middle">
                 <li>
-                    <a href="add-intervention.php">
+                    <a href="add-client.php">
                         <img src="img/add-icon.png" width="16" height="16" class="img" alt="+">
-                        Ajout d'une nouvelle intervention
+                        Ajout d'un nouveau client
+                    </a>
+                </li>
+                <li>
+                    <a href="recherche-client.php">
+                        <img src="img/search-icon.png" width="16" height="16" class="img" alt="+">
+                        Recherche
                     </a>
                 </li>
             </ul>
