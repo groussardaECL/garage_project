@@ -80,6 +80,8 @@
                 </div>
             </div>
         </div>
+<?php include "inc/footer-affectation.html";?>
+
 </body>
 </html>
 

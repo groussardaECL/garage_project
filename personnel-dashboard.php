@@ -66,12 +66,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>ID <?php if ($job != 'referents') {
-                                    echo 'techniciens';
-                                };
-                                if ($job != 'techniciens') {
-                                    echo 'référents';
-                                }; ?></th>
+                            <th>ID</th>
                             <th>Nom</th>
                             <th>Prénom</th>
                         </tr>
@@ -108,6 +103,8 @@
             </div>
         </div>
     </div>
+
+    <?php include "inc/footer-personnel.html";?>
 
 </body>
 </html>

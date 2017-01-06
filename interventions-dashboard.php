@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -36,17 +37,19 @@
             <h1 class="page-header">Dashboard - Interventions</h1>
 
             <h2 class="sub-header">Liste des interventions</h2>
-            <div class="table-responsive col-md-8">
+            <div class="table-responsive col-md-10">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>ID Intervention</th>
+                        <th>ID</th>
                         <th>Type d'intervention</th>
                         <th>Désignation</th>
-                        <th>Immatriculation véhicule entrant</th>
+                        <th>Immatriculation</th>
                         <th>Kilométrage</th>
                         <th>Date d'entrée</th>
                         <th>Technicien</th>
+                        <th>Plus de détails</th>
+                        <th><i>Commentaire</i></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -65,6 +68,8 @@
                             echo '<td>' . $donnees['kilometrage'] . '</td>';
                             echo '<td>' . $donnees['dateArrivee'] . '</td>';
                             echo '<td>'. $donnees2['prenomt'] . ' '. $donnees2['nomt'] . '</td>';
+                            echo '<td><a href="intervention.php?idintervention='.$donnees['IDintervention'].'">Details</a></td>';
+                            echo '<td><a href="add-commentaire.php?idintervention='.$donnees['IDintervention'].'"><img src=img/add-comment-icon.png width="16" height="16" class="img" alt="+"/></a></td>';
                             echo '</tr>';
                         }
                     }
@@ -75,6 +80,6 @@
         </div>
     </div>
 </div>
-
+<?php include "inc/footer-intervention.html";?>
 </body>
 </html>

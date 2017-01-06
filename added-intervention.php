@@ -98,7 +98,7 @@
                     <h1 class="page-header">
                         Intervention enregistrée !
                     </h1>
-                    <div class="col-xs-10 col-sm-10 placeholder">
+                    <div class="col-xs-10 col-sm-10 col-md-8 placeholder">
                         <a href="interventions-dashboard.php">
                             <img src="img/tools.png" width="200" height="200" class="img-responsive bw"
                                  alt="Accés aux interventions">
@@ -128,7 +128,7 @@
                     </h1>
                     <div class="col-xs-10 col-sm-10 placeholder">
                         <a href="interventions-dashboard.php">
-                            <img src="img/tools.png" width="200" height="200" class="img-responsive bw"
+                            <img src="img/tools.png" width="200" height="200" class="img-responsive bw centered"
                                  alt="Accés aux interventions">
                         </a>
                         <h4> Le véhicule immatriculé
@@ -146,6 +146,7 @@
         </div>
     <?php };
 };?>
+<?php include "inc/footer-intervention.html";?>
 </body>
 </html>
 

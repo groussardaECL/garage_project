@@ -56,23 +56,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-footer col-sm-3 col-md-2">
-            <a class="navbar-brand" href="#">Actions</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-middle">
-                <li>
-                    <a href="add-forfait.php">
-                        <img src="img/add-icon.png" width="16" height="16" class="img" alt="+">
-                        Ajout d'un nouveau forfait
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php include "inc/footer-forfait.html";?>
 
 
 </body>

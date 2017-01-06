@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,6 +43,7 @@
                     <tr>
                         <th>Désignation</th>
                         <th>Prix</th>
+                        <th>Modifier</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,16 +54,18 @@
                             echo '<tr>';
                             echo '<td>' . $donnees['typeIntervention'] . '</td>';
                             echo '<td>' . $donnees['prixForfait'] . '</td>';
+                            echo '<td><a href="modify-forfait.php?typeIntervention='.$donnees['typeIntervention'].'"><img src=img/modify-icon.png width="16" height="16" class="img" alt="+"/></a></td>';
                             echo '</tr>';
                     }
                     ?>
-                    <a href="add-forfait.php" class="text-muted">Ajouter un autre forfait</a> | <a href="modify-forfait.php" class="text-muted">Modifier</a>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+<?php include "inc/footer-forfait.html";?>
 
 </body>
 </html>

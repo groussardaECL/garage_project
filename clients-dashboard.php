@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,7 +40,7 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>ID Client</th>
+                        <th>ID</th>
                         <th>Nom</th>
                         <th>Prénom</th>
                         <th>Commune</th>
@@ -71,29 +72,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-footer col-sm-3 col-md-2">
-            <a class="navbar-brand" href="#">Actions</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-middle">
-                <li>
-                    <a href="add-client.php">
-                        <img src="img/add-icon.png" width="16" height="16" class="img" alt="+">
-                        Ajout d'un nouveau client
-                    </a>
-                </li>
-                <li>
-                    <a href="recherche-client.php">
-                        <img src="img/search-icon.png" width="16" height="16" class="img" alt="+">
-                        Recherche
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php include "inc/footer-client.html";?>
 
 </body>
 </html>

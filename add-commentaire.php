@@ -34,20 +34,19 @@
     <div class="row">
         <?php include "inc/side-bar.html"; ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Ajout d'un commentaire</h1>
-
+            <h1 class="page-header">Ajout d'un commentaire sur l'intervention n°
+                <?php
+                echo $_GET['idintervention'];
+                ?>
+            </h1>
             <!-- Form Template from ColorLib.com -->
             <div class="container">
                 <form id="contact" action="added-commentaire.php" method="post">
-                    <h3>Informations Commentaire</h3>
-                    <h4>Allez sur le Dashboard Interventions pour connaitre l'ID :</h4>
-                    <fieldset>
-                        <input placeholder="ID de l'intervention" type="number" tabindex="1" name="intervention" required autofocus>
-                    </fieldset>
-                    <fieldset>
-                        <textarea name="commentaire" id="commentaire" required>Tapez votre commentaire ici.</textarea>
-                    </fieldset>
+                    <h3>Commentaire</h3>
                     <h4>Indiquez l'auteur du commentaire :</h4>
+                    <fieldset>
+                        <input type="hidden" name="intervention" id="hiddenField" value="<?php echo $_GET['idintervention'] ?>" />
+                    </fieldset>
                     <fieldset>
                         <select name="technicien" required>
                             <?php
@@ -58,6 +57,10 @@
                             ?>
                         </select>
                     </fieldset>
+                    </h4>
+                    <fieldset>
+                        <textarea name="commentaire" id="commentaire" placeholder="Tapez votre commentaire ici." required></textarea>
+                    </fieldset>
                     <fieldset>
                         <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Ajout</button>
                     </fieldset>
@@ -67,31 +70,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
-    <div class="container-fluid">
-        <div class="navbar-footer col-sm-3 col-md-2">
-            <a class="navbar-brand" href="#">Actions</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-middle">
-                <li>
-                    <a href="add-client.php">
-                        <img src="img/add-icon.png" width="16" height="16" class="img" alt="+">
-                        Ajout d'un nouveau client
-                    </a>
-                </li>
-                <li>
-                    <a href="recherche-client.php">
-                        <img src="img/search-icon.png" width="16" height="16" class="img" alt="+">
-                        Recherche
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
+<?php include "inc/footer-commentaire.html";?>
 
 </body>
 </html>

@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -64,6 +65,8 @@ $ecriture->execute(array(
     </div>
 </div>
 </div>
+
+<?php include "inc/footer-commentaire.html";?>
 
 </body>
 

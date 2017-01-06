@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -113,9 +114,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="row">
-                <h2 class="sub-header">Statistiques Communes</h2>
+
                 <div class="table-responsive col-md-4">
                     <table class="table table-striped">
                         <thead>
@@ -135,9 +134,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="row">
-                <h2 class="sub-header">Statistiques Techniciens</h2>
+
                 <div class="table-responsive col-md-4">
                     <table class="table table-striped">
                         <thead>
@@ -161,6 +158,7 @@
         </div>
     </div>
 </div>
+
 
 </body>
 </html>
