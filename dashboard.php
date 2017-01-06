@@ -27,45 +27,46 @@
 </head>
 <body>
 
-    <?php include "inc/header.html"; ?>
+<?php include "inc/header.html"; ?>
 
-    <div class="container-fluid">
-        <div class="row">
-            <?php include "inc/side-bar.html"; ?>
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">Dashboard</h1>
+<div class="container-fluid">
+    <div class="row">
+        <?php include "inc/side-bar.html"; ?>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Dashboard</h1>
 
-                <div class="row placeholders">
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <a href="interventions-dashboard.php">
-                            <img src="img/tools.png" width="200" height="200" class="img-responsive bw" alt="Accès aux interventions">
-                        </a>
-                        <h4>Interventions</h4>
-                        <a href="add-intervention.php" class="text-muted">Nouveau</a> | <a href="find-intervention.php" class="text-muted">Rechercher</a>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <a href="clients-dashboard.php">
-                            <img src="img/client.png" width="200" height="200" class="img-responsive bw" alt="Accés aux clients">
-                        </a>
-                        <h4>Clients</h4>
-                        <a href="add-client.php" class="text-muted">Nouveau</a> | <a href="find-client.php" class="text-muted">Rechercher</a>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <a href="vehicules-dashboard.php">
-                            <img src="img/car.png" width="200" height="200" class="img-responsive bw" alt="Accés aux véhicules">
-                        </a>
-                        <h4>Vehicules</h4>
-                        <a href="add-vehicule.php" class="text-muted">Nouveau</a> | <a href="modify-vehicule.php" class="text-muted">Modifier</a> | <a href="find-vehicule.php" class="text-muted">Rechercher</a>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <a href="personnel-dashboard.php">
-                            <img src="img/staff.png" width="200" height="200" class="img-responsive bw" alt="Accés aux personnel">
-                        </a>
-                        <h4>Personnel</h4>
-                        <a href="add-personnel.php" class="text-muted">Nouveau</a> | <a href="find-personnel.php" class="text-muted">Rechercher</a>
-                    </div>
+            <div class="row placeholders">
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <a href="interventions-dashboard.php">
+                        <img src="img/tools.png" width="200" height="200" class="img-responsive bw" alt="Accès aux interventions">
+                    </a>
+                    <h4>Interventions</h4>
+                    <a href="add-intervention.php" class="text-muted">Nouveau</a>
                 </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <a href="clients-dashboard.php">
+                        <img src="img/client.png" width="200" height="200" class="img-responsive bw" alt="Accés aux clients">
+                    </a>
+                    <h4>Clients</h4>
+                    <a href="add-client.php" class="text-muted">Nouveau</a>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <a href="vehicules-dashboard.php">
+                        <img src="img/car.png" width="200" height="200" class="img-responsive bw" alt="Accés aux véhicules">
+                    </a>
+                    <h4>Vehicules</h4>
+                    <a href="add-vehicule.php" class="text-muted">Nouveau</a> | <a href="modify-vehicule.php" class="text-muted">Modifier</a>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <a href="personnel-dashboard.php">
+                        <img src="img/staff.png" width="200" height="200" class="img-responsive bw" alt="Accés aux personnel">
+                    </a>
+                    <h4>Personnel</h4>
+                    <a href="add-personnel.php" class="text-muted">Nouveau</a>
+                </div>
+            </div>
 
+            <div class="row">
                 <h2 class="sub-header">Statistiques générales</h2>
                 <div class="table-responsive col-md-4">
                     <table class="table table-striped">
@@ -113,8 +114,53 @@
                     </table>
                 </div>
             </div>
+            <div class="row">
+                <h2 class="sub-header">Statistiques Communes</h2>
+                <div class="table-responsive col-md-4">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Villes</th>
+                            <th>Nombre de clients</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $reponse = $bdd->query('SELECT nomCommune, COUNT(nomCommune) as nbclients FROM clients GROUP BY nomCommune');
+                        while ($donnees = $reponse->fetch()) {
+                            echo '<tr><td>'.$donnees['nomCommune'].'</td><td>'.$donnees['nbclients'].'</td></tr>';
+                        };
+                        $reponse->closeCursor();
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <h2 class="sub-header">Statistiques Techniciens</h2>
+                <div class="table-responsive col-md-4">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Techniciens</th>
+                            <th>Nombre d'interventions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $reponse = $bdd->query('SELECT t.IDtechnicien, r.IDtechnicien, t.nom as nomt, t.prenom as prenomt, COUNT(t.IDtechnicien) as nbinterventions FROM repare as r, techniciens as t WHERE t.IDtechnicien=r.IDtechnicien GROUP BY t.IDtechnicien');
+                        while ($donnees = $reponse->fetch()) {
+                            echo '<tr><td>'.$donnees['prenomt'].' '.$donnees['nomt'].'</td><td>'.$donnees['nbinterventions'].'</td></tr>';
+                        };
+                        $reponse->closeCursor();
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
 </body>
 </html>

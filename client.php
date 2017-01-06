@@ -33,40 +33,35 @@
     <div class="row">
         <?php include "inc/side-bar.html"; ?>
         <?php
-            $reponse = $bdd->query("SELECT IDclient, c.nom as nomc, c.prenom as prenomc, nomCommune FROM clients as c WHERE IDclient='$_GET[idclient]'");
-            $donnees = $reponse->fetch();
+        $reponse_client = $bdd->query("SELECT IDclient, c.nom as nomc, c.prenom as prenomc, nomCommune FROM clients as c WHERE IDclient='$_GET[idclient]'");
+        $donnees_client = $reponse_client->fetch();
         ?>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Fiche client</h1>
             <div class="table-responsive col-md-8">
                 <table class="table table-striped">
-                            <tr>
-                                <td>Nom</b></td>
-                                <td colspan="14"><?php echo $donnees['nomc']; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Prénom</b></td>
-                                <td colspan="14"><?php echo $donnees['prenomc']; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Commune</b></td>
-                                <td colspan="14"><?php echo $donnees['nomCommune']; ?></td>
-                            </tr>
-                            <tr>
-                                <td>Véhicules</b></td>
-                                <td colspan="14">
-                                    <?php
-                                    $reponse1 = $bdd->query("SELECT  immatriculation FROM appartient WHERE IDclient='$_GET[idclient]'");
-                                    while ($donnees1 = $reponse1->fetch())
-                                    {$vehicule=$donnees1['immatriculation'];
-
-                                    $reponse2 = $bdd->prepare("SELECT v.typeVehicule as typeVehiculev, v.marque as marquev, v.annee as anneev FROM vehicules as v WHERE v.immatriculation='".$vehicule."'");
-                                    $donnees2 = $reponse2->execute() or die(print_r($reponse2->errorInfo()));
-
-                                    echo '<a href="vehicule.php?immatriculation='.$donnees2['immatriculation'].'">'.$donnees2['marquev']. $donnees2['typeVehiculev']. ' de '.$donnees2['anneev'].'</a>';
-                                    }; ?></td>
-                            </tr>
+                    <tr>
+                        <td>Client</td>
+                        <td><?php echo $donnees_client['prenomc'].' '.$donnees_client['nomc']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Commune</td>
+                        <td><?php echo $donnees_client['nomCommune']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Véhicule(s)</td>
+                        <td>
+                            <?php
+                            $reponse_immat= $bdd->query("SELECT a.immatriculation as immatriculationa, v.immatriculation as immatriculationv, marque, annee FROM appartient as a, vehicules as v WHERE IDclient=$_GET[idclient] AND a.immatriculation=v.immatriculation;");
+                            while ($donnees_immat = $reponse_immat->fetch())
+                            {
+                                echo $donnees_immat['immatriculationa'].' ('.$donnees_immat['marque'].' - '.$donnees_immat['annee'].')</br>';
+                            }
+                            ?>
+                        </td>
+                    </tr>
                 </table>
+                <a href="clients-dashboard.php">Retour au Dashboard Client</a>
             </div>
         </div>
     </div>

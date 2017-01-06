@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -50,38 +51,33 @@
                     </fieldset>
                 </form>
             </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
             <div class="container">
-            <?php if (isset($_POST['job'])) { ?>
-            <?php $job = $_POST['job']; ?>
-            <h3 class="sub-header">Liste des
-                <?php if ($job != 'referents') {
-                    echo 'techniciens';
-                };
-                if ($job != 'techniciens') {
-                    echo 'référents';
-                }; ?></h3>
-            <div class="table-responsive col-md-8">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID <?php if ($job != 'referents') {
-                                echo 'techniciens';
-                            };
-                            if ($job != 'techniciens') {
-                                echo 'référents';
-                            }; ?></th>
-                        <th>Nom</th>
-                        <th>Prénom</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
+                <?php if (isset($_POST['job'])) { ?>
+                <?php $job = $_POST['job']; ?>
+                <h3 class="sub-header">Liste des
+                    <?php if ($job != 'referents') {
+                        echo 'techniciens';
+                    };
+                    if ($job != 'techniciens') {
+                        echo 'référents';
+                    }; ?></h3>
+                <div class="table-responsive col-md-8">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID <?php if ($job != 'referents') {
+                                    echo 'techniciens';
+                                };
+                                if ($job != 'techniciens') {
+                                    echo 'référents';
+                                }; ?></th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
                         if ($job != 'referents') {
                             $reponse = $bdd->query('SELECT IDtechnicien, t.nom as nomt, t.prenom as prenomt FROM techniciens as t;');
                             while ($donnees = $reponse->fetch() OR $donnees2 = $reponse->fetch()) {
@@ -96,26 +92,26 @@
                         if ($job != 'techniciens') {
                             $reponse = $bdd->query('SELECT IDreferent, r.nom as nomr, r.prenom as prenomr FROM referents as r;');
                             while ($donnees = $reponse->fetch() OR $donnees2 = $reponse->fetch()) {
-                            echo '<tr>';
-                            echo '<td>' . $donnees['IDreferent'] . '</td>';
-                            echo '<td>' . $donnees['nomr'] . '</td>';
-                            echo '<td>' . $donnees['prenomr'] . '</td>';
-                            echo '<td>';
-                            echo '</tr>';
-                        }
+                                echo '<tr>';
+                                echo '<td>' . $donnees['IDreferent'] . '</td>';
+                                echo '<td>' . $donnees['nomr'] . '</td>';
+                                echo '<td>' . $donnees['prenomr'] . '</td>';
+                                echo '<td>';
+                                echo '</tr>';
+                            }
                         };
                         /**echo '<a class="delete" href="delete.php?ID='.$a['ID'].'"'.
                          * ' onclick="return confirm(\'Voulez-vous vraiment supprimer ces Jeux Olympiques ?\')")>X</a>&nbsp;';
                          * echo '<a href="detail.php?ID='.$a['ID'].'">'.$a['Annee'].'</a>';
                          * echo '</td>'; */
-                    };
-                    ?>
-                    </tbody>
-                </table>
+                        };
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </body>
 </html>

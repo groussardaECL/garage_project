@@ -23,12 +23,14 @@ body {
 .container {
     max-width: 400px;
     width: 100%;
-    margin: 0 auto;
+    margin-left: 0;
     position: relative;
 }
 
 #contact input[type="text"],
 #contact input[type="email"],
+#contact input[type="number"],
+#contact input[type="date"],
 #contact input[type="tel"],
 #contact input[type="url"],
 #contact textarea,
@@ -38,17 +40,21 @@ body {
 }
 
 #contact {
-    background: #F9F9F9;
+    background: #ffffff;
     padding: 25px;
     margin: 10px 0;
+    margin-top:0;
+    /*
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+     */
 }
 
 #contact h3 {
     display: block;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 300;
     margin-bottom: 10px;
+    margin-top: 0;
 }
 
 #contact h4 {
@@ -67,7 +73,9 @@ fieldset {
 }
 
 #contact input[type="text"],
+#contact input[type="number"],
 #contact input[type="email"],
+#contact input[type="date"],
 #contact input[type="tel"],
 #contact input[type="url"],
 #contact select,
@@ -81,6 +89,8 @@ fieldset {
 
 #contact input[type="text"]:hover,
 #contact input[type="email"]:hover,
+#contact input[type="number"]:hover,
+#contact input[type="date"]:hover,
 #contact input[type="tel"]:hover,
 #contact input[type="url"]:hover,
 #contact select:hover,
