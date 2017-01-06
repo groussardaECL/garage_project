@@ -52,7 +52,8 @@
                         <td>Véhicule(s)</td>
                         <td>
                             <?php
-                            $reponse_immat= $bdd->query("SELECT a.immatriculation as immatriculationa, v.immatriculation as immatriculationv, marque, annee FROM appartient as a, vehicules as v WHERE IDclient=$_GET[idclient] AND a.immatriculation=v.immatriculation;");
+                            $reponse_immat= $bdd->prepare("SELECT a.immatriculation as immatriculationa, v.immatriculation as immatriculationv, marque, annee FROM appartient as a, vehicules as v WHERE IDclient= ? AND a.immatriculation=v.immatriculation;");
+                            $reponse_immat->execute(array($_GET['idclient']));
                             while ($donnees_immat = $reponse_immat->fetch())
                             {
                                 echo $donnees_immat['immatriculationa'].' ('.$donnees_immat['marque'].' - '.$donnees_immat['annee'].')</br>';
