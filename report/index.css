@@ -55,7 +55,6 @@ object{
 }
 
 .side-menu{
-    position: fixed;
     left:70%;
     text-align: center;
 }
@@ -91,4 +90,9 @@ object{
     width: 30px;
     margin-left:15px;
     margin-right:15px;
+}
+
+#EERdiagram {
+    border: solid darkgrey 1px;
+    padding: 10px;
 }

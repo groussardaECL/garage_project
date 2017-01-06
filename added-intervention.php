@@ -113,6 +113,26 @@
                             href="find-intervention.php" class="text-muted">Rechercher</a>
                     </div>
                 </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <h1 class="page-header">
+                        Intervention enregistrée !
+                    </h1>
+                    <div class="col-xs-6 col-sm-3 placeholder">
+                        <a href="interventions-dashboard.php">
+                            <img src="img/tools.png" width="200" height="200" class="img-responsive bw"
+                                 alt="Accés aux interventions">
+                        </a>
+                        <h4> L'intervention sur le véhicule immatriculé
+                            <?php
+                            echo $_POST['immatriculation'];
+                            ?>
+                            a été enregistrée.
+                        </h4>
+                        <a href="add-intervention.php" class="text-muted">Ajouter une autre intervention</a> | <a
+                                href="modify-intervention.php" class="text-muted">Modifier</a> | <a
+                                href="find-intervention.php" class="text-muted">Rechercher</a>
+                    </div>
+                </div>
             </div>
         </div>
     <?php };
