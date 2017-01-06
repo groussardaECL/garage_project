@@ -56,7 +56,6 @@
                     }
                     ?>
                     <a href="add-forfait.php" class="text-muted">Ajouter un autre forfait</a> | <a href="modify-forfait.php" class="text-muted">Modifier</a>
-
                     </tbody>
                 </table>
             </div>

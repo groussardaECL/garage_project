@@ -18,6 +18,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -50,10 +52,10 @@
 
         if ($repa != 'forfaitaire') {
 
-            $req1 = $bdd->prepare('INSERT INTO interventions(typeIntervention, Designation, prixPiece, prixMainOeuvre, kilometrage, dateArrivee, immatriculation) VALUES (:typeIntervention, :Designation, :prixPiece, :prixMainOeuvre, :kilometrage, :dateArrivee, :immatriculation)');
+            $req1 = $bdd->prepare('INSERT INTO interventions(typeIntervention, designation, prixPiece, prixMainOeuvre, kilometrage, dateArrivee, immatriculation) VALUES (:typeIntervention, :designation, :prixPiece, :prixMainOeuvre, :kilometrage, :dateArrivee, :immatriculation)');
             $req1->execute(array(
                 'typeIntervention' => $_POST['forfait'],
-                'Designation' => $_POST['Designation'],
+                'designation' => $_POST['designation'],
                 'prixPiece' => $_POST['pieces'],
                 'prixMainOeuvre' => $_POST['mdo'],
                 'kilometrage' => $_POST['km'],
@@ -68,10 +70,10 @@
             $req2 = $bdd->query("SELECT prixForfait FROM forfaits WHERE typeIntervention='$_POST[forfait]'");
             $donnees = $req2->fetch();
 
-            $req3 = $bdd->prepare('INSERT INTO interventions(typeIntervention, Designation, prixPiece, prixMainOeuvre, kilometrage, dateArrivee, immatriculation) VALUES (:typeIntervention, :Designation, :prixPiece, :prixMainOeuvre, :kilometrage, :dateArrivee, :immatriculation)');
+            $req3 = $bdd->prepare('INSERT INTO interventions(typeIntervention, designation, prixPiece, prixMainOeuvre, kilometrage, dateArrivee, immatriculation) VALUES (:typeIntervention, :designation, :prixPiece, :prixMainOeuvre, :kilometrage, :dateArrivee, :immatriculation)');
             $req3->execute(array(
                 'typeIntervention' => $_POST['forfait'],
-                'Designation' => 'NULL',
+                'designation' => 'NULL',
                 'prixPiece' => 0,
                 'prixMainOeuvre' => 0,
                 'kilometrage' => $_POST['km'],
@@ -80,7 +82,6 @@
             )) or die(print_r($req3->errorInfo()));
 
         };
-
 
         $req4 = $bdd->query("SELECT MAX(IDintervention) FROM interventions");
         $donnees4 = $req4->fetch();
@@ -93,11 +94,11 @@
         <div class="container-fluid">
             <div class="row">
                 <?php include "inc/side-bar.html"; ?>
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="col-sm-9 col-sm-offset-3 col-md-5 col-md-offset-2 main">
                     <h1 class="page-header">
                         Intervention enregistrée !
                     </h1>
-                    <div class="col-xs-6 col-sm-3 placeholder">
+                    <div class="col-xs-10 col-sm-10 placeholder">
                         <a href="interventions-dashboard.php">
                             <img src="img/tools.png" width="200" height="200" class="img-responsive bw"
                                  alt="Accés aux interventions">
@@ -109,28 +110,7 @@
                             a été enregistrée.
                         </h4>
                         <a href="add-intervention.php" class="text-muted">Ajouter une autre intervention</a> | <a
-                            href="modify-intervention.php" class="text-muted">Modifier</a> | <a
-                            href="find-intervention.php" class="text-muted">Rechercher</a>
-                    </div>
-                </div>
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">
-                        Intervention enregistrée !
-                    </h1>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <a href="interventions-dashboard.php">
-                            <img src="img/tools.png" width="200" height="200" class="img-responsive bw"
-                                 alt="Accés aux interventions">
-                        </a>
-                        <h4> L'intervention sur le véhicule immatriculé
-                            <?php
-                            echo $_POST['immatriculation'];
-                            ?>
-                            a été enregistrée.
-                        </h4>
-                        <a href="add-intervention.php" class="text-muted">Ajouter une autre intervention</a> | <a
-                                href="modify-intervention.php" class="text-muted">Modifier</a> | <a
-                                href="find-intervention.php" class="text-muted">Rechercher</a>
+                            href="add-technicien-to-intervention.php" class="text-muted">Ajouter un technicien en charge</a> | <a
                     </div>
                 </div>
             </div>
@@ -146,7 +126,7 @@
                     <h1 class="page-header">
                         Echec de l'enregistrement !
                     </h1>
-                    <div class="col-xs-6 col-sm-3 placeholder">
+                    <div class="col-xs-10 col-sm-10 placeholder">
                         <a href="interventions-dashboard.php">
                             <img src="img/tools.png" width="200" height="200" class="img-responsive bw"
                                  alt="Accés aux interventions">

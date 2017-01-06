@@ -32,12 +32,15 @@
 <?php
 if ( $_SERVER['REQUEST_METHOD'] != 'POST' ) die ('Illegal call');
 
+$selectiondate = $bdd->query('SELECT NOW()');
+$donnees = $selectiondate->fetch();
+
 $ecriture = $bdd->prepare('INSERT INTO commentaires(IDintervention, IDtechnicien, commentaire, dateHeureCommentaire) VALUES (:IDintervention, :IDtechnicien, :commentaire, :dateHeureCommentaire)');
 $ecriture->execute(array(
     'IDintervention' => $_POST['intervention'],
     'IDtechnicien' => $_POST['technicien'],
     'commentaire' => $_POST['commentaire'],
-    'dateHeureCommentaire' => NOW()))
+    'dateHeureCommentaire' => $donnees['NOW()']))
      or die(print_r($ecriture->errorInfo()));
 ?>
 

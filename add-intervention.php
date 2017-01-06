@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/form.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -46,7 +47,7 @@
                                     </fieldset>
                                     <h4>Renseignez les champs ci-dessous :</h4>
                                     <fieldset>
-                                        <input placeholder="N° d'immatriculation du véhicule" type="number" tabindex="1" name="immatriculation" required>
+                                        <input placeholder="N° d'immatriculation du véhicule" type="text" tabindex="1" name="immatriculation" required>
                                     </fieldset>
                                     <fieldset>
                                         <input placeholder="Kilométrage" type="number" tabindex="2" name="km" required>
@@ -67,7 +68,7 @@
                                     </fieldset>
                                     <h4>S'il s'agit d'une prestation non forfaitaire</h4>
                                     <fieldset>
-                                        <input placeholder="Désignation" type="text" tabindex="4" name="Designation">
+                                        <input placeholder="Désignation" type="text" tabindex="4" name="designation">
                                     </fieldset>
                                     <fieldset>
                                         <input placeholder="Prix des pièces en €" type="number" tabindex="5" name="pieces">
@@ -82,16 +83,6 @@
                                             $reponse = $bdd->query('SELECT IDtechnicien, nom, prenom FROM techniciens');
                                             while ($donnees_technicien = $reponse->fetch()) {
                                                 echo '<option value="' .$donnees_technicien['IDtechnicien']. '">' .$donnees_technicien['prenom']. ' ' .$donnees_technicien['nom']. '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </fieldset>
-                                    <fieldset>
-                                        <select name="technicien-2" required>
-                                            <?php
-                                            $reponse = $bdd->query('SELECT IDtechnicien, nom, prenom FROM techniciens');
-                                            while ($donnees_technicien2 = $reponse->fetch()) {
-                                                echo '<option value="' .$donnees_technicien2['IDtechnicien']. '">' .$donnees_technicien['prenom']. ' ' .$donnees_technicien['nom']. '</option>';
                                             }
                                             ?>
                                         </select>
